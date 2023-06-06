@@ -13,7 +13,7 @@ This script allows you to fetch all your payslips, P60 and P11D forms from rsmuk
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/payslip-fetcher.git
+git clone https://github.com/loglux/allmypayslips.git
 ```
 
 
