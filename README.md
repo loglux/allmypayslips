@@ -49,4 +49,5 @@ python payslip_fetcher.py
 ## Notes
 Ensure that the Chrome browser is installed and compatible with the Chrome WebDriver version.
 You can also use Selenium Grid by configuring the remote WebDriver URL in the script.
+All files are saved into a default directory (Downloads)
 
