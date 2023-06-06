@@ -27,6 +27,10 @@ pip install selenium
 
 4. Place the downloaded Chrome WebDriver executable in the project's directory.
 
+Script reffers to the Windows version of the webdriver (webdriver.exe). Update it, if you use Mac or Linux.
+
+Alternatively to steps 3 and 4, you can use Selenium Grid instead of webdriver, just update 'self.driver =' uncommenting and commenting out correspodning lines.
+
 ## Usage
 
 1. Open the `payslip_fetcher.py` script in a text editor.
@@ -42,4 +46,7 @@ Save the changes.
 Run the payslip_fetcher.py script:
 ```python python payslip_fetcher.py
 ```
+## Notes
+Ensure that the Chrome browser is installed and compatible with the Chrome WebDriver version.
+You can also use Selenium Grid by configuring the remote WebDriver URL in the script.
 
