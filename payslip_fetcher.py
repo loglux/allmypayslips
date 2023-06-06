@@ -12,7 +12,7 @@ class PayslipFetcher:
 
     def __init__(self):
         self.options = Options()
-        self.options.add_argument("--headless")
+        self.options.add_argument("--headless=new")
         self.options.add_argument("--no-sandbox")
         self.options.add_argument("--disable-dev-shm-usage")
         # Set User-Agent to mimic a Chrome browser on Windows
