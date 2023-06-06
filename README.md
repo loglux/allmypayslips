@@ -1,6 +1,6 @@
 # Payslip Fetcher
 
-This script allows you to fetch payslips from an online portal. 
+This script allows you to fetch all your payslips, P60 and P11D forms from rsmuk.com portal. 
 
 ## Prerequisites
 
