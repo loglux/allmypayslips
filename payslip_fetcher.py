@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.chrome.service import Service
 import time
 
 
@@ -18,7 +19,7 @@ class PayslipFetcher:
         # Set User-Agent to mimic a Chrome browser on Windows
         self.options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
         # Replace 'path_to_chromedriver' with the actual path to your local chromedriver.exe
-        self.driver = webdriver.Chrome('chromedriver.exe', options=self.options)
+        self.driver = webdriver.Chrome(service=Service("chromedriver.exe"), options=self.options)
         # Or use the remote webdriver for Selenium Grid
         # self.driver = webdriver.Remote("http://192.168.10.32:4444/wd/hub", options=self.options)
         self.wait = WebDriverWait(self.driver, 10)
