@@ -43,7 +43,8 @@ payslip_fetcher.login('<replace-with-your-username>', '<replace-with-your-passwo
 Save the changes.
 
 Run the payslip_fetcher.py script:
-```python python payslip_fetcher.py
+```python 
+python payslip_fetcher.py
 ```
 ## Notes
 Ensure that the Chrome browser is installed and compatible with the Chrome WebDriver version.
