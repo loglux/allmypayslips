@@ -6,8 +6,7 @@ This script allows you to fetch payslips from an online portal.
 
 - Python 3.x
 - Selenium module (`pip install selenium`)
-- Chrome browser
-- Chrome WebDriver
+- Chrome browser and Chrome WebDriver or Selenium Grid
 
 ## Installation
 
