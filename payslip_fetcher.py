@@ -35,7 +35,7 @@ class PayslipFetcher:
         # Wait for the login process to complete
         time.sleep(2)
 
-    def fetch_documents(self):
+    def fetch_payslips(self):
         # Go to the home page
         self.driver.get('https://inpay.es.rsmuk.com/PayslipPortal4/Secured/Home.aspx')
         # Create a list to store the payslip URLs
@@ -122,7 +122,7 @@ class PayslipFetcher:
 if __name__ == '__main__':
     payslip_fetcher = PayslipFetcher()
     payslip_fetcher.login('<replace-with-your-username>', '<replace-with-your-password>')
-    payslip_fetcher.fetch_documents()
+    payslip_fetcher.fetch_payslips()
     payslip_fetcher.fetch_p60_forms()
     payslip_fetcher.fetch_p11d_forms()
     payslip_fetcher.quit()
