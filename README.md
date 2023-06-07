@@ -52,7 +52,7 @@ python payslip_fetcher.py
 By default, the PayslipFetcher script runs in headless mode, which means the Chrome browser runs in the background without a visible UI. If you want to disable headless mode and run the script with a visible browser window, you can comment out the following line in the `PayslipFetcher` class:
 
 ```python
-# self.options.add_argument("--headless")
+# self.options.add_argument("--headless=new")
 ```
 
 ## Notes
