@@ -1,6 +1,5 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -40,22 +39,10 @@ class PayslipFetcher:
         # Go to the home page
         self.driver.get('https://inpay.es.rsmuk.com/PayslipPortal4/Secured/Home.aspx')
         # Create a list to store the payslip URLs
-        payslip_urls = []
-        # Find all rows in the table
-        rows = self.driver.find_elements(By.CSS_SELECTOR, ".table.dataTable.no-footer tbody tr")
-        # Exit the loop if there are no more rows
-        if len(rows) == 0:
-            return
-        # Extract the date and the URL of the payslip for each row
-        for row in rows:
-            try:
-                # Extract the URL of the payslip
-                payslip_url = row.find_element(By.CSS_SELECTOR, "td a").get_attribute('href')
-                # Add the payslip URL to the list
-                payslip_urls.append(payslip_url)
-            except NoSuchElementException:
-                # Handle any other exception or skip the row if needed
-                continue
+        # Find all rows in the table and extract the payslip URLs
+        payslip_urls = [row.find_element(By.CSS_SELECTOR, "td a").get_attribute('href')
+                        for row in self.driver.find_elements(By.CSS_SELECTOR, ".table.dataTable.no-footer tbody tr")
+                        if row.find_elements(By.CSS_SELECTOR, "td a")]
         # Iterate over the payslip URLs
         for payslip_url in payslip_urls:
             # Navigate to the payslip page
@@ -82,22 +69,11 @@ class PayslipFetcher:
         pdf_button.click()
         # Wait for the download to complete
         time.sleep(2)
-        # Find the dropdown for selecting tax years
-        tax_year_dropdown = self.driver.find_element(By.ID, '_ctl0_CpBody_ddlTaxYear')
-        # Get all the options in the dropdown
-        options = tax_year_dropdown.find_elements(By.TAG_NAME, 'option')
-        # Create a list to store the options
-        option_list = []
-        # Iterate over the options to select and save each P60 form
-        for option in options:
-            # Get the value (tax year) and text (displayed year) of each option
-            value = option.get_attribute('value')
-            text = option.text
-            # Skip the currently selected option (latest P60 form)
-            if option.is_selected():
-                continue
-            # Add the option to the list
-            option_list.append((value, text))
+        # Find the dropdown for selecting tax years and get all the options
+        options = self.driver.find_element(By.ID, '_ctl0_CpBody_ddlTaxYear').find_elements(By.TAG_NAME, 'option')
+        # Create a list of option tuples, excluding the currently selected option
+        option_list = [(option.get_attribute('value'), option.text)
+                       for option in options if not option.is_selected()]
         # Iterate over the option list to fetch and save P60 forms
         for option in option_list:
             value, text = option
@@ -126,20 +102,10 @@ class PayslipFetcher:
         pdf_button.click()
         # Wait for the download to complete
         time.sleep(2)
-        # Find the dropdown for selecting tax years
-        tax_year_dropdown = self.driver.find_element(By.ID, '_ctl0_CpBody_ddlTaxYear')
-        # Get all the options in the dropdown
-        options = tax_year_dropdown.find_elements(By.TAG_NAME, 'option')
-        # Create a list to store the options
-        option_list = []
-        # Iterate over the options to select and save each P11D form
-        for option in options:
-            # Get the value (tax year) and text (displayed year) of each option
-            value = option.get_attribute('value')
-            text = option.text
-            # Add the option to the list
-            option_list.append((value, text))
-        # Iterate over the option list to fetch and save P11D forms
+        # Find the dropdown for selecting tax years and get all the options
+        options = self.driver.find_element(By.ID, '_ctl0_CpBody_ddlTaxYear').find_elements(By.TAG_NAME, 'option')
+        # Create a list of option tuples
+        option_list = [(option.get_attribute('value'), option.text) for option in options]
         print(option_list)
         # Iterate over the option list to fetch and save P11D forms
         for index in range(1, len(option_list)):  # Start from index 1
