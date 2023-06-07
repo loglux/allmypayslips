@@ -64,16 +64,11 @@ class PayslipFetcher:
         self.driver.get('https://inpay.es.rsmuk.com/PayslipPortal4/Secured/P60Viewer.aspx')
         # Wait for the page to load
         time.sleep(2)
-        # Find the PDF button and click it to save the latest P60 form
-        pdf_button = self.driver.find_element(By.ID, '_ctl0_CpBody_ExportToPDFBtn')
-        pdf_button.click()
-        # Wait for the download to complete
-        time.sleep(2)
         # Find the dropdown for selecting tax years and get all the options
         options = self.driver.find_element(By.ID, '_ctl0_CpBody_ddlTaxYear').find_elements(By.TAG_NAME, 'option')
         # Create a list of option tuples, excluding the currently selected option
         option_list = [(option.get_attribute('value'), option.text)
-                       for option in options if not option.is_selected()]
+                       for option in options]
         # Iterate over the option list to fetch and save P60 forms
         for option in option_list:
             value, text = option
@@ -97,19 +92,14 @@ class PayslipFetcher:
         self.driver.get('https://inpay.es.rsmuk.com/PayslipPortal4/Secured/P11DViewer.aspx')
         # Wait for the page to load
         time.sleep(2)
-        # Find the PDF button and click it to save the P11D form
-        pdf_button = self.driver.find_element(By.ID, '_ctl0_CpBody_ExportToPDFBtn')
-        pdf_button.click()
-        # Wait for the download to complete
-        time.sleep(2)
         # Find the dropdown for selecting tax years and get all the options
         options = self.driver.find_element(By.ID, '_ctl0_CpBody_ddlTaxYear').find_elements(By.TAG_NAME, 'option')
         # Create a list of option tuples
         option_list = [(option.get_attribute('value'), option.text) for option in options]
         print(option_list)
         # Iterate over the option list to fetch and save P11D forms
-        for index in range(1, len(option_list)):  # Start from index 1
-            value, text = option_list[index]
+        for option in option_list:
+            value, text = option
             # Select the option to fetch the P11D form
             tax_year_dropdown = Select(self.driver.find_element(By.ID, '_ctl0_CpBody_ddlTaxYear'))
             tax_year_dropdown.select_by_value(value)
