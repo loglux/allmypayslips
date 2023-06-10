@@ -28,7 +28,7 @@ pip install selenium
 
 Script reffers to the Windows version of the webdriver (webdriver.exe). Update it, if you use Mac or Linux.
 
-Alternatively to steps 3 and 4, you can use Selenium Grid instead of webdriver, just update 'self.driver =' uncommenting and commenting out correspodning lines.
+Alternatively, to steps 3 and 4, you can use Selenium Grid instead of Webdriver; just update 'self.driver =' uncommenting and commenting out corresponding lines.
 
 ## Usage
 
